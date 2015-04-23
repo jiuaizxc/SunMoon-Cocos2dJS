@@ -469,7 +469,7 @@ dragonBones.Animation = cc.Class.extend({
 		this._animationStateList.length = 0;
 		this._armature = null;
 		this._lastAnimationState = null;
-		this._animationDataList.length = null;
+		this._animationDataList = null;
 	},
 
 	clear:function(){

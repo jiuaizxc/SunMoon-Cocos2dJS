@@ -50,6 +50,8 @@ SunMoon.MainInit = function(screenType, cb){
 
 
 SunMoon.audioEngine = cc.Class.extend({
+	_backstage:false,
+	
     _isMuteEffect:false,
     _isMuteBG:false,
 
@@ -123,7 +125,7 @@ SunMoon.audioEngine = cc.Class.extend({
     }
 });
 
-SunMoon.SoundManager = new SunMoon.audioEngine;
+SunMoon.SoundManager = new SunMoon.audioEngine();
 
 SunMoon.ScreenUtil = {
     H_TO_V:1,
@@ -211,3 +213,21 @@ SunMoon.HtoS = cc.Scene.extend({
         this.addChild(this._backColor);
     }
 });
+
+SunMoon.OpenURL = function(url){
+	if(cc.sys.isNative){
+		if(cc.sys.os == cc.sys.OS_ANDROID){
+			jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "OpenURL", "(Ljava/lang/String;)V", url);
+		}
+	}else{
+        window.open(url, "_blank");
+    }
+};
+
+SunMoon.exit = function(){
+	if(cc.sys.isNative){
+		if(cc.sys.os == cc.sys.OS_ANDROID){
+			jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "exit", "()V");
+		}
+	}
+};
